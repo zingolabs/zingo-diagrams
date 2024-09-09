@@ -1,5 +1,6 @@
 import type { Item } from "@/data/projects";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 type Props = {
     item: Item;
@@ -15,7 +16,7 @@ export default function FeaturedItemCard({ item }: Props) {
             </CardHeader>
             <CardContent>
                 <a href={item.href}>
-                    View
+                    <Button variant={"outline"}>View</Button>
                 </a>
             </CardContent>
         </Card>
