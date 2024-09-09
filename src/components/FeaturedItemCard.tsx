@@ -16,7 +16,7 @@ export default function FeaturedItemCard({ item }: Props) {
             </CardHeader>
             <CardContent>
                 <a href={item.href}>
-                    <Button variant={"outline"}>View</Button>
+                    <Button variant={"default"}>View</Button>
                 </a>
             </CardContent>
         </Card>

@@ -3,12 +3,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 
 import { projects } from "@/data/projects";
 import FeaturedItemCard from "@/components/FeaturedItemCard";
+import { Separator } from "@/components/ui/separator";
 
 const featuredItems = [ ...projects]
 ---
-<section class="flex flex-col gap-4">
+<section class="flex flex-col gap-2">
     <h1 class="text-2xl w-full font-semibold text-start">Featured projects</h1>
-    <div class="grid grid-cols-2 gap-4">
+    <Separator />
+    <div class="grid grid-cols-2 gap-4 mt-2">
         {featuredItems.map((item) => {
             return <FeaturedItemCard item={item} />
         })}
