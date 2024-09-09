@@ -1,6 +1,6 @@
 import BaseCustomNode from "@/components/custom_nodes/BaseCustomNode";
 import Dagre from '@dagrejs/dagre';
-import { Background, Controls, ReactFlow, useEdgesState, useNodesState , useReactFlow, type Edge, type Node, type NodeMouseHandler } from "@xyflow/react";
+import { Background, Controls, ReactFlow, ReactFlowProvider, useEdgesState, useNodesState, useReactFlow, type Edge, type Node, type NodeMouseHandler } from "@xyflow/react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 // import '@xyflow/react/dist/style.css';
 type Props = {
@@ -41,7 +41,9 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
 };
 
 
-export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }: Props) {
+function FlowCanvas({ nodes: initialNodes, edges: initialEdges }: Props) {
+
+    const { fitView } = useReactFlow();
 
     const nodeTypes = useMemo(() => ({
         baseCustom: BaseCustomNode
@@ -54,17 +56,20 @@ export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }:
 
     useEffect(() => {
         if (!hasLayoutedElements) {
-          // Wait for the next tick to ensure custom nodes have rendered and have `measured` dimensions
-          setTimeout(() => {
-            const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges);
-            setNodes(layoutedNodes);
-            setEdges(layoutedEdges);
-    
-            setHasLayoutedElements(true); // Prevent further layout calculations
+            // Wait for the next tick to ensure custom nodes have rendered and have `measured` dimensions
+            setTimeout(() => {
+                const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges);
+                setNodes(layoutedNodes);
+                setEdges(layoutedEdges);
 
-          }, 20);
+                setHasLayoutedElements(true); // Prevent further layout calculations
+                
+            }, 30);
         }
-      }, [nodes, edges, hasLayoutedElements]);
+
+        fitView();
+
+    }, [nodes, edges, hasLayoutedElements]);
 
     const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
 
@@ -104,7 +109,7 @@ export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }:
 
         return isParentOrChild ? selectedState : dimmedState;
     }
-    
+
     return (
         <div style={{ height: '80vh', width: '100%', opacity: hasLayoutedElements ? 1 : 0 }}>
             <ReactFlow
@@ -115,17 +120,26 @@ export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }:
                     type: 'baseCustom',
                     data: { ...node.data, style: node.style }
                 }))}
+                nodesDraggable={false}
                 edges={edges.map((edge) => ({ ...edge, ...getEdgeProps(edge) }))}
                 onNodeMouseEnter={onNodeMouseEnter}
                 onNodeMouseLeave={onNodeMouseLeave}
-                fitView
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 style={{ height: '100%', width: '100%' }}
+                fitView
             >
-                <Background />
-                <Controls />
+                <Background  />
+                <Controls  />
             </ReactFlow>
         </div>
     )
+}
+
+export default function ({ nodes: initialNodes, edges: initialEdges }: Props) {
+    return (
+        <ReactFlowProvider>
+            <FlowCanvas nodes={initialNodes} edges={initialEdges} />
+        </ReactFlowProvider>
+    );
 }
