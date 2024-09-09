@@ -11,19 +11,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-
-const projects: { title: string; href: string; description: string }[] = [
-    {
-        title: "Zcashd Deprecation",
-        href: "/diagrams/zcashd-deprecation",
-        description: "Deprecation DAG for zcashd"
-    },
-    {
-        title: "ZIP 320",
-        href: "/diagrams/zip-320",
-        description: "ZIP 320 DAG"
-    }
-]
+import { projects } from "../data/projects";
 
 export default function Nav() {
     return (
