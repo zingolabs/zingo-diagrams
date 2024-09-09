@@ -32,7 +32,7 @@ const nodes : DAGNode[] = [
         description: 'Some other description',
         kb_url: 'https://github.com/zcash/zcash/issues/1000',
         gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
-        children: ['1.5']
+        children: ['1.5', '1.8']
     },
     {
         id: '1.4',
@@ -40,7 +40,7 @@ const nodes : DAGNode[] = [
         description: 'Some other description',
         kb_url: 'https://github.com/zcash/zcash/issues/1000',
         // gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
-        children: ['1.6']
+        children: ['1.6', '1.7']
     },
     {
         id: '1.5',
@@ -48,7 +48,7 @@ const nodes : DAGNode[] = [
         description: 'Some other description',
         // kb_url: 'https://github.com/zcash/zcash/issues/1000',
         gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
-        children: ['1.8']
+        children: ['1.7']
     },
     {
         id: '1.6',
@@ -57,7 +57,32 @@ const nodes : DAGNode[] = [
         kb_url: 'https://github.com/zcash/zcash/issues/1000',
         gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
         children: []
-    }
+    },
+    {
+        id: '1.7',
+        label: '1.7',
+        description: 'Some other description',
+        kb_url: 'https://github.com/zcash/zcash/issues/1000',
+        gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
+        children: []
+    },
+    {
+        id: '1.8',
+        label: '1.8',
+        description: 'Some other description',
+        kb_url: 'https://github.com/zcash/zcash/issues/1000',
+        gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
+        children: ['2.1']
+    },
+    {
+        id: '2.1',
+        label: '2.1',
+        description: 'Some other description',
+        kb_url: 'https://github.com/zcash/zcash/issues/1000',
+        gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
+        children: []
+    },
+
     
 ]
 

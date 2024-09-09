@@ -1,6 +1,7 @@
-import { addEdge, Background, Controls, ReactFlow, useEdgesState, useNodesState, type Edge, type Node } from "@xyflow/react";
-import { useState, useCallback, useMemo } from "react";
 import BaseCustomNode from "@/components/custom_nodes/BaseCustomNode";
+import Dagre from '@dagrejs/dagre';
+import { Background, Controls, ReactFlow, useEdgesState, useNodesState , useReactFlow, type Edge, type Node, type NodeMouseHandler } from "@xyflow/react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 // import '@xyflow/react/dist/style.css';
 type Props = {
     className?: string;
@@ -9,6 +10,35 @@ type Props = {
     nodes: Node[];
     edges: Edge[];
 }
+
+const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
+    const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
+    g.setGraph({ rankdir: 'LR' });
+
+    edges.forEach((edge) => g.setEdge(edge.source, edge.target));
+    nodes.forEach((node) =>
+        g.setNode(node.id, {
+            ...node,
+            width: node.measured?.width ?? 0,
+            height: node.measured?.height ?? 0,
+        }),
+    );
+
+    Dagre.layout(g);
+
+    return {
+        nodes: nodes.map((node) => {
+            const position = g.node(node.id);
+            // We are shifting the dagre node position (anchor=center center) to the top left
+            // so it matches the React Flow node anchor point (top left).
+            const x = position.x - (node.measured?.width ?? 0) / 2;
+            const y = position.y - (node.measured?.height ?? 0) / 2;
+
+            return { ...node, position: { x, y } };
+        }),
+        edges,
+    };
+};
 
 
 export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }: Props) {
@@ -20,14 +50,25 @@ export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }:
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const [hoveredNodeId, setHoveredNodeId] = useState(null);
+    const [hasLayoutedElements, setHasLayoutedElements] = useState(false);
 
-    const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge(params, eds)),
-        [setEdges],
-    );
+    useEffect(() => {
+        if (!hasLayoutedElements) {
+          // Wait for the next tick to ensure custom nodes have rendered and have `measured` dimensions
+          setTimeout(() => {
+            const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges);
+            setNodes(layoutedNodes);
+            setEdges(layoutedEdges);
+    
+            setHasLayoutedElements(true); // Prevent further layout calculations
 
-    const onNodeMouseEnter = useCallback((event, node) => {
+          }, 20);
+        }
+      }, [nodes, edges, hasLayoutedElements]);
+
+    const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+
+    const onNodeMouseEnter: NodeMouseHandler = useCallback((event, node) => {
         setHoveredNodeId(node.id);
     }, []);
 
@@ -63,10 +104,9 @@ export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }:
 
         return isParentOrChild ? selectedState : dimmedState;
     }
-
-
+    
     return (
-        <div style={{ height: '80vh', width: '100%' }}>
+        <div style={{ height: '80vh', width: '100%', opacity: hasLayoutedElements ? 1 : 0 }}>
             <ReactFlow
                 nodeTypes={nodeTypes}
                 nodes={nodes.map((node) => ({
@@ -82,7 +122,6 @@ export default function FlowCanvas({ nodes: initialNodes, edges: initialEdges }:
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 style={{ height: '100%', width: '100%' }}
-                onConnect={onConnect}
             >
                 <Background />
                 <Controls />
