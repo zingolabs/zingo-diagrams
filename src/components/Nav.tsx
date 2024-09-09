@@ -18,7 +18,7 @@ export default function Nav() {
         <NavigationMenu>
             <NavigationMenuList>
                 <ListedMenuItem items={projects} title="Projects" />
-                <SimpleMenuItem title="Documentation" href="/docs" />
+                <SimpleMenuItem title="Wiki" href="https://zingo-wiki.vercel.app" />
             </NavigationMenuList>
         </NavigationMenu>
     )
@@ -77,7 +77,7 @@ const ListedMenuItem = ({ items, title }: { items: MenuItem[], title: string }) 
     )
 }
 
-const SimpleMenuItem = ({ title, href }: { title: string, href: string }) => {
+const SimpleMenuItem = ({ title, href , target = "_parent" }: { title: string, href: string, target?: string }) => {
     return (
         <NavigationMenuItem>
             <NavigationMenuLink asChild>
@@ -86,6 +86,7 @@ const SimpleMenuItem = ({ title, href }: { title: string, href: string }) => {
                         "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
                     )}
                     href={href}
+                    target={target}
                 >
                     <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                         {title}
