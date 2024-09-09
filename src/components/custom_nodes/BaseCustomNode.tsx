@@ -23,7 +23,7 @@ export default function BaseCustomNode<T extends BaseDataType>({ data }: Props<T
         <>
             <Handle type="target" position={Position.Left} />
             <Handle type="source" position={Position.Right} />
-            <Card style={data.style}>
+            <Card style={{...data.style, width: 300}}> 
                 <CardHeader>
                     <CardTitle>{data.label}</CardTitle>
                     <CardDescription>{data.description ?? 'No description'}</CardDescription>
