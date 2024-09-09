@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
-import { Handle, Position, type Node } from '@xyflow/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Handle, Position, type Node } from '@xyflow/react';
 import { Button } from '../ui/button';
-import { navigate } from 'astro/virtual-modules/transitions-router.js';
+import { Icons } from '../ui/icons';
 
 const handleStyle = { left: 10 };
 
@@ -31,11 +30,21 @@ export default function BaseCustomNode<T extends BaseDataType>({ data }: Props<T
                 </CardHeader>
                 <CardContent>
                     <div className="flex gap-2">
-                        <a href={data.gh_issue_url}>
-                            <Button variant={"default"} disabled={!data.gh_issue_url}>Issue</Button>
+                        <a href={data.gh_issue_url} target='_blank'>
+                            <Button variant={"default"} disabled={!data.gh_issue_url} >
+                                <div className="flex gap-1 place-items-center">
+                                    <Icons.gitHub style={{ height: '1.2em', width: '1.2em' }} />
+                                    <span>Issue</span>
+                                </div>
+                            </Button>
                         </a>
-                        <a href={data.kb_url}>
-                            <Button variant={"outline"} disabled={!data.kb_url}>KB entry</Button>
+                        <a href={data.kb_url} target='_blank'>
+                            <Button variant={"outline"} disabled={!data.kb_url}>
+                                <div className="flex gap-1 place-items-center">
+                                    <Icons.wiki style={{ height: '1.2em', width: '1.2em' }} />
+                                    <span>Wiki</span>
+                                </div>
+                            </Button>
                         </a>
                     </div>
                 </CardContent>

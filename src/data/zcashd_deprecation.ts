@@ -40,7 +40,7 @@ const nodes : DAGNode[] = [
         description: 'Some other description',
         kb_url: 'https://github.com/zcash/zcash/issues/1000',
         // gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
-        children: ['1.7']
+        children: ['1.6']
     },
     {
         id: '1.5',
@@ -50,6 +50,14 @@ const nodes : DAGNode[] = [
         gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
         children: ['1.8']
     },
+    {
+        id: '1.6',
+        label: '1.6',
+        description: 'Some other description',
+        kb_url: 'https://github.com/zcash/zcash/issues/1000',
+        gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
+        children: []
+    }
     
 ]
 
