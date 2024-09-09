@@ -72,7 +72,7 @@ const nodes : DAGNode[] = [
         description: 'Some other description',
         kb_url: 'https://github.com/zcash/zcash/issues/1000',
         gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
-        children: ['2.1']
+        children: ['2.1', '2.2']
     },
     {
         id: '2.1',
@@ -80,10 +80,26 @@ const nodes : DAGNode[] = [
         description: 'Some other description',
         kb_url: 'https://github.com/zcash/zcash/issues/1000',
         gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
-        children: []
+        children: ['3.1']
     },
+    {
+        id: '2.2',
+        label: '2.2',
+        description: 'Some other description',
+        kb_url: 'https://github.com/zcash/zcash/issues/1000',
+        gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
+        children: ['3.1']
+    },
+    {
+        id: '3.1',
+        label: '3.1',
+        description: 'Some other description',
+        kb_url: 'https://github.com/zcash/zcash/issues/1000',
+        gh_issue_url: 'https://github.com/zcash/zcash/issues/1000',
+        children: []
+    }
 
-    
+   
 ]
 
 export default nodes;
