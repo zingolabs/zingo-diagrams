@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 // import { Icons } from "@/components/icons"
 import {
     NavigationMenu,
@@ -8,9 +8,8 @@ import {
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+    NavigationMenuTrigger
+} from "@/components/ui/navigation-menu";
 import { projects } from "../data/projects";
 
 export default function Nav() {

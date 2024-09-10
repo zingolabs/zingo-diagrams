@@ -31,17 +31,17 @@ export default function BaseCustomNode<T extends BaseDataType>({ data }: Props<T
                 <CardContent>
                     <div className="flex gap-2">
                         <a href={data.gh_issue_url} target='_blank'>
-                            <Button variant={"default"} disabled={!data.gh_issue_url} >
+                            <Button size={'sm'} variant={"default"} disabled={!data.gh_issue_url} >
                                 <div className="flex gap-1 place-items-center">
-                                    <Icons.gitHub style={{ height: '1.2em', width: '1.2em' }} />
+                                    <Icons.gitHub style={{ height: '1em', width: '1em' }} />
                                     <span>Issue</span>
                                 </div>
                             </Button>
                         </a>
                         <a href={data.kb_url} target='_blank'>
-                            <Button variant={"outline"} disabled={!data.kb_url}>
+                            <Button size={'sm'} variant={"outline"} disabled={!data.kb_url}>
                                 <div className="flex gap-1 place-items-center">
-                                    <Icons.wiki style={{ height: '1.2em', width: '1.2em' }} />
+                                    <Icons.wiki style={{ height: '1em', width: '1em' }} />
                                     <span>Wiki</span>
                                 </div>
                             </Button>
