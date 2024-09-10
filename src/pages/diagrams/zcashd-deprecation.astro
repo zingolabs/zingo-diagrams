@@ -1,10 +1,10 @@
 ---
 import DagreFlow from "@/components/DagreFlow";
 import FlowCanvas from "@/components/FlowCanvas";
-import zcashd_deprecation, { transformDAG } from "@/data/zcashd_deprecation";
+import zcashd_deprecation from "@/data/zcashd_deprecation";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const { nodes, edges } = transformDAG(zcashd_deprecation);
+const { nodes, edges } = zcashd_deprecation;
 
 ---
 <BaseLayout title="Zcashd Deprecation">

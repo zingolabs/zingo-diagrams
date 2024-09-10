@@ -11,7 +11,8 @@ import {
 
 
 import '@xyflow/react/dist/style.css';
-import zcashd_deprecation, { transformDAG } from '@/data/zcashd_deprecation';
+import zcashd_deprecation from '@/data/zcashd_deprecation';
+import { transformDAG } from "@/utils/transformDAG";
 import BaseCustomNode from './custom_nodes/BaseCustomNode';
 
 const { nodes: initialNodes, edges: initialEdges } = transformDAG(zcashd_deprecation);
