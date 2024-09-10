@@ -13,5 +13,5 @@ export default defineConfig({
     })
   ],
   site: 'https://zingolabs.github.io',
-  base: '/zingo-diagrams/',
+  base: 'zingo-diagrams',
 });
