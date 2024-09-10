@@ -14,10 +14,11 @@ type Props = {
 const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
     const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
     g.setGraph({
-        rankdir: 'LR',
-        acyclicer: 'greedy',
+        rankdir: 'TB',
+        // acyclicer: 'greedy',
+        // align: 'DR',
         // ranker: 'longest-path',
-        ranker: 'tight-tree',
+        // ranker: 'tight-tree',
         ranksep: 150,
         nodesep: 10,
     });
@@ -121,6 +122,7 @@ function FlowCanvas({ nodes: initialNodes, edges: initialEdges }: Props) {
         <div style={{ height: '90vh', width: '100%', opacity: hasLayoutedElements ? 1 : 0 }}>
             <ReactFlow
                 nodeTypes={nodeTypes}
+                minZoom={0.1}
                 nodes={nodes.map((node) => ({
                     ...node,
                     ...getNodeProps(node),
