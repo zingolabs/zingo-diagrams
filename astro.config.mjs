@@ -11,5 +11,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false
     })
-  ]
+  ],
+  site: 'https://zingolabs.github.io',
+  base: 'zingo-diagrams',
 });
