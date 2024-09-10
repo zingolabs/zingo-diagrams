@@ -1,15 +1,6 @@
 import type { Node, Edge } from "@xyflow/react";
-
-type Repo = 'librustzcash' | 'zcash' | 'zips';
-
-export type DAGNode = {
-    description?: string;
-    kb_url?: string;
-    repo?: Repo;
-    // gh_issue_url?: string;
-    // children?: string[];
-}
-
+import type { DAG, DAGData, Repo, DAGNode, DAGEdge, CEdge } from "@/types/zcashd-deprecation.types";
+import { IDS } from "@/types/zcashd-deprecation.types";
 const DEFAULT_REPO: Repo = 'librustzcash';
 
 // {
@@ -53,48 +44,6 @@ const DEFAULT_REPO: Repo = 'librustzcash';
 //     "zcash/zcash#6453": "Provide a wallet upgrade path that moves funds held by legacy keys into a unified account."
 // }
 
-enum IDS {
-    I_1363='I_1363',
-    I_1350='I_1350',
-    I_1412='I_1412',
-    I_1414='I_1414',
-    I_1373='I_1373',
-    I_1335='I_1335',
-    I_1415='I_1415',
-    I_1395='I_1395',
-    I_1367='I_1367',
-    I_1410='I_1410',
-    I_4099='I_4099',
-    I_1372='I_1372',
-    I_1368='I_1368',
-    I_1366='I_1366',
-    I_1351='I_1351',
-    I_1381='I_1381',
-    I_1362='I_1362',
-    I_1379='I_1379',
-    I_578='I_578',
-    I_1188='I_1188',
-    I_675='I_675',
-    I_6873='I_6873',
-    I_1364='I_1364',
-    I_1360='I_1360',
-    I_1371='I_1371',
-    I_1361='I_1361',
-    I_1348='I_1348',
-    I_5796='I_5796',
-    I_6453='I_6453',
-    I_821='I_821',
-    I_1411='I_1411',
-    I_1369='I_1369',
-    I_1370='I_1370',
-    I_1353='I_1353',
-    I_579='I_579',
-    I_1365='I_1365',
-    I_1074='I_1074',
-    I_1349='I_1349',
-
-}
-
 const nodes: Record<IDS, DAGNode> = {
     [IDS.I_1363]: { description: 'Enumerate the capabilities exposed by zcashd APIs for spending transparent coins.' },
     [IDS.I_1350]: { description: 'Determine what subset of zcashd wallet functionality will be required by users in a replacement wallet (independent of how it is accessed)' },
@@ -135,11 +84,6 @@ const nodes: Record<IDS, DAGNode> = {
     [IDS.I_1074]: { description: 'Transparent input details should be retrieved with transactions on account recovery' },
     [IDS.I_1349]: { description: 'zcash_client_backend: Required functionality for full `zcashd` wallet replacement.' },
 }
-
-type CEdge = {
-    source: IDS;
-    target: IDS;
-};
 
 const edges: CEdge[] = [
     {
@@ -356,8 +300,7 @@ const edges: CEdge[] = [
     }
 ]
 
-const enrichedNodes: Node[] = Object.entries(nodes)
-    .map(([key, value]) => {
+const enrichedNodes: Node[] = Object.entries(nodes).map(([key, value]) => {
         console.log(key, value);
         const clave = key.split('_')[1];
         const repo = value.repo ? value.repo : DEFAULT_REPO;
@@ -365,6 +308,7 @@ const enrichedNodes: Node[] = Object.entries(nodes)
         const description = value.description;
         const kb_url = `https://zingo-wiki.vercel.app/issues/I${clave}`; 
         const gh_issue_url = `https://github.com/zcash/${repo}/issues/${clave}`;
+        const status = value.status ?? 'open';
         return {
             id: key.toString(),
             position: { x: 0, y: 0 },
@@ -373,6 +317,7 @@ const enrichedNodes: Node[] = Object.entries(nodes)
                 description,
                 kb_url,
                 gh_issue_url,
+                status,
              }
         } 
     });
