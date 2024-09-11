@@ -1,15 +1,27 @@
 ---
 interface Props {
-    size: number;
+  size: number;
 }
 const { size } = Astro.props;
 const defaultSize = 30;
 ---
+
 <a href="/">
-    <div class="flex items-center gap-2">
-        <div class="rounded-full" style={{ width: `${size || defaultSize}px`, height: `${size || defaultSize}px` }}>
-            <img id="logo" src="/zingo-diagrams/zingologo.png" alt="Zingo logo" class="w-full h-full rounded-full" />
-        </div>
-        <span class="text-3xl font-bold">Zingo!</span>
+  <div class="flex items-center gap-2">
+    <div
+      class="rounded-full"
+      style={{
+        width: `${size || defaultSize}px`,
+        height: `${size || defaultSize}px`,
+      }}
+    >
+      <img
+        id="logo"
+        src="/zingo-diagrams/zingologo.png"
+        alt="Zingo logo"
+        class="w-full h-full rounded-full"
+      />
     </div>
+    <span class="text-3xl font-bold">Zingo!</span>
+  </div>
 </a>
