@@ -22,7 +22,7 @@ export default function NodeComponent({ data }: Props) {
         </CardHeader>
         <CardContent>
           <div className="flex gap-2 flex-end h-full">
-            <a href={data.gh_issue_url} target="_blank">
+            {/* <a href={data.gh_issue_url} target="_blank">
               <Button
                 size={"sm"}
                 variant={"default"}
@@ -33,15 +33,15 @@ export default function NodeComponent({ data }: Props) {
                   <span>Issue</span>
                 </div>
               </Button>
-            </a>
-            {/* <a href={data.kb_url} target="_blank">
+            </a> */}
+            <a href={data.kb_url} target="_blank">
               <Button size={"sm"} variant={"outline"} disabled={!data.kb_url}>
                 <div className="flex gap-1 place-items-center">
                   <Icons.wiki style={{ height: "1em", width: "1em" }} />
                   <span>Wiki</span>
                 </div>
               </Button>
-            </a> */}
+            </a>
           </div>
         </CardContent>
       </Card>

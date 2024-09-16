@@ -137,6 +137,7 @@ export type ZainoRoadmapNode = Node<{
     id: string;
     description: string;
     gh_issue_url?: string;
+    kb_url: string;
 }>;
 
 const nodes : ZainoRoadmapNode[] = items.map(getNodeFromDataItem);
@@ -154,6 +155,7 @@ function getNodeFromDataItem(item: ZainoRoadmapDataItem): ZainoRoadmapNode {
             id: id,
             description: item.description,
             gh_issue_url: item.gh_issue_url,
+            kb_url: `https://zingo-wiki.vercel.app/projects/zaino/roadmap/steps/${id}`,
         },
     };
 }
