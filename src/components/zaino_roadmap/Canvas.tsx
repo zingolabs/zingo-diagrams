@@ -50,7 +50,7 @@ export default function Canvas() {
           minZoom={0.1}
           nodes={nodes.map((node) => getWrappedNode(node, edges, hoveredNodeId))}
           nodesDraggable={false}
-          edges={edges}
+          edges={edges.map((edge) => ({ ...edge, ...getEdgeProps(edge, hoveredNodeId) }))}
           onNodeMouseEnter={onNodeMouseEnter}
           onNodeMouseLeave={onNodeMouseLeave}
           onNodesChange={onNodesChange}
@@ -110,3 +110,18 @@ function getWrappedNode(node: ZainoRoadmapNode, edges: ZainoRoadmapEdge[], hover
 }
 
 export type WrappedNode = ZainoRoadmapNode & { style: CSSProperties , data: ZainoRoadmapNode['data'] & { style: CSSProperties } };
+
+
+function getEdgeProps(edge: ZainoRoadmapEdge, hoveredNodeId: string | null) {
+    const isParentOrChild = edge.source === hoveredNodeId || edge.target === hoveredNodeId;
+    const normalState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'black', strokeWidth: 1 }, animated: false };
+    const dimmedState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'black', strokeWidth: 1, opacity: 0.2 }, animated: false, labelStyle: { fill: 'black' } };
+    const selectedState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'green', strokeWidth: 2 }, animated: true, labelStyle: { fill: 'green' } };
+    const selectedParentState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'green', strokeWidth: 2 }, animated: true, labelStyle: { fill: 'green' } };
+    const selectedChildState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'green', strokeWidth: 2 }, animated: true, labelStyle: { fill: 'green' } };
+    const selectedSiblingState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'green', strokeWidth: 2 }, animated: true, labelStyle: { fill: 'green' } };
+    
+    if (!hoveredNodeId) return normalState;
+    if (isParentOrChild) return isParentOrChild ? selectedParentState : selectedChildState;
+    return isParentOrChild ? selectedSiblingState : dimmedState;
+}
