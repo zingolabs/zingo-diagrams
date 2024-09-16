@@ -3,14 +3,13 @@ import { Handle, Position, type Node } from '@xyflow/react';
 import { Button } from '../ui/button';
 import { Icons } from '../ui/icons';
 
-const handleStyle = { left: 10 };
-
 type BaseDataType = {
     label: string;
     description?: string;
     style: Node['style'];
     kb_url?: string;
     gh_issue_url?: string;
+    status?: 'open' | 'working-on' | 'closed';
 };
 
 type Props<T extends BaseDataType> = {
