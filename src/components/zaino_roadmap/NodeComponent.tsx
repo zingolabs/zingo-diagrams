@@ -21,7 +21,7 @@ export default function NodeComponent({ data }: Props) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-end h-full">
             <a href={data.gh_issue_url} target="_blank">
               <Button
                 size={"sm"}
