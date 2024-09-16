@@ -11,8 +11,8 @@ export const projects: Item[] = [
     description: "Deprecation DAG for zcashd",
   },
   {
-    title: "ZIP 320",
-    href: "/zingo-diagrams/diagrams/zip-320",
-    description: "ZIP 320 DAG",
+    title: "Zaino Roadmap",
+    href: "/zingo-diagrams/diagrams/zaino-roadmap",
+    description: "Roadmap for Zaino",
   },
 ];
