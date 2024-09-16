@@ -42,6 +42,14 @@ const milestones: Milestone[] = [
   },
 ];
 
+type MilestoneNode = Node<Milestone>
+
+const milestoneNodes : MilestoneNode[] = milestones.map((milestone) => ({
+    id: `ms-${milestone.id}`,
+    position: { x: milestone.id * 380, y: -300 },
+    data: milestone,
+}));
+
 type ZainoRoadmapDataItem = {
   id: [Milestone["id"], number];
   index: [number, number];
@@ -241,6 +249,7 @@ const edges : ZainoRoadmapEdge[] = simpleEdges.map((edge) => ({
     source: edge.source,
     target: edge.target,
 }));
+
 
 export { nodes, edges };
 
