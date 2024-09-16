@@ -4,12 +4,9 @@ import zcashd_deprecation from "@/data/zcashd_deprecation";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const { nodes, edges } = zcashd_deprecation;
-
 ---
+
 <BaseLayout title="Zcashd Deprecation">
-    <h1>Zcashd Deprecation</h1>
-    <FlowCanvas client:idle
-        nodes={nodes}
-        edges={edges}
-    />
+  <h1>Zcashd Deprecation</h1>
+  <FlowCanvas client:idle nodes={nodes} edges={edges} />
 </BaseLayout>
