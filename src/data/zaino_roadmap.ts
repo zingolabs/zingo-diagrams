@@ -149,7 +149,7 @@ function getNodeFromDataItem(item: ZainoRoadmapDataItem): ZainoRoadmapNode {
     const id = item.id.join('.');
     return {
         id: id,
-        position: { x: x * 180, y: y * 100 },
+        position: { x: x * 380, y: y * 300 },
         data: {
             id: id,
             description: item.description,
@@ -160,13 +160,85 @@ function getNodeFromDataItem(item: ZainoRoadmapDataItem): ZainoRoadmapNode {
 
 export type ZainoRoadmapEdge = Edge
 
-const edges: ZainoRoadmapEdge[] = [
+
+type simpleEdge = {
+    source: string;
+    target: string;
+}
+
+const simpleEdges : simpleEdge[] = [
     {
         source: '1.1',
-        target: '1.2',
-        id: '1.1-1.2',
+        target: '1.3',
     },
+    {
+        source: '1.2',
+        target: '1.4',
+    },
+    {
+        source: '1.2',
+        target: '1.5',
+    },
+    {
+        source: '1.2',
+        target: '1.6',
+    },
+    {
+        source: '1.3',
+        target: '2.1',
+    },
+    {
+        source: '1.4',
+        target: '2.5',
+    },
+    {
+        source: '1.5',
+        target: '2.5',
+    },
+    {
+        source: '1.6',
+        target: '2.6',
+    },
+    {
+        source: '2.1',
+        target: '2.3',
+    },
+    {
+        source: '2.1',
+        target: '2.4',
+    },
+    {
+        source: '2.3',
+        target: '2.5',
+    },
+    {
+        source: '2.4',
+        target: '2.5',
+    },
+    {
+        source: '2.5',
+        target: '3.1',
+    },
+    {
+        source: '2.6',
+        target: '3.1',
+    },
+    {
+        source: '2.6',
+        target: '3.4',
+    }
+
 ]
+
+function getEdgeId(source: string, target: string) {
+    return `${source}-${target}`;
+}
+
+const edges : ZainoRoadmapEdge[] = simpleEdges.map((edge) => ({
+    id: getEdgeId(edge.source, edge.target),
+    source: edge.source,
+    target: edge.target,
+}));
 
 export { nodes, edges };
 

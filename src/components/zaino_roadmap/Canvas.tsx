@@ -21,6 +21,8 @@ import NodeComponent from "./NodeComponent";
 
 export default function Canvas() {
 
+    console.log('rendering canvas')
+
   const nodeTypes = useMemo(
     () => ({
       custom: NodeComponent,
@@ -42,7 +44,6 @@ export default function Canvas() {
   }, []);
 
 
-
   return (
     <ReactFlowProvider>
       <div style={{ height: "90vh", width: "100%" }}>
@@ -51,7 +52,7 @@ export default function Canvas() {
           minZoom={0.1}
           nodes={nodes.map((node) => getWrappedNode(node, edges, hoveredNodeId))}
           nodesDraggable={false}
-          edges={edges}
+          edges={edges.map((edge) => ({ ...edge, ...getEdgeProps(edge, hoveredNodeId) }))}
           onNodeMouseEnter={onNodeMouseEnter}
           onNodeMouseLeave={onNodeMouseLeave}
           // onNodesChange={onNodesChange}
@@ -105,9 +106,22 @@ function getWrappedNode(node: ZainoRoadmapNode, edges: ZainoRoadmapEdge[], hover
   return {
     ...node,
     style: { ...node.style, ...getNodeStyle(node, edges, hoveredNodeId) },
-    // data: { ...node.data, style: node.style },
+    data: { ...node.data, style: node.style || {} },
     type: "custom",
   };
 }
 
-export type WrappedNode = ZainoRoadmapNode & { style: CSSProperties };
+export type WrappedNode = ZainoRoadmapNode & { style: CSSProperties , data: ZainoRoadmapNode['data'] & { style: CSSProperties } };
+
+const getEdgeProps = (edge: ZainoRoadmapEdge, hoveredNodeId: string | null) => {
+
+    const isParentOrChild = edge.source === hoveredNodeId || edge.target === hoveredNodeId;
+
+    const normalState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'black', strokeWidth: 1 }, animated: false };
+    const dimmedState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'black', strokeWidth: 1, opacity: 0.2 }, animated: false };
+    const selectedState: Partial<ZainoRoadmapEdge> = { style: { stroke: 'green', strokeWidth: 2 }, animated: true };
+
+    if (!hoveredNodeId) return normalState;
+
+    return isParentOrChild ? selectedState : dimmedState;
+}
