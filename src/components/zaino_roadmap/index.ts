@@ -1,5 +1,6 @@
-import Canvas from "./Canvas";
+
+import ZainoRoadmapCanvas from "./Canvas";
 
 export {
-    Canvas,
+    ZainoRoadmapCanvas,
 }
