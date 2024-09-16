@@ -115,7 +115,7 @@ const items: ZainoRoadmapDataItem[] = [
     },
     {
         id: [2, 6],
-        description: 'Leverage implementation to contextuilize and finalize full architecture of Indexer.',
+        description: 'Leverage implementation to contextualize and finalize full architecture of Zaino.',
         index: [4, 3],
     },
     {
@@ -130,7 +130,7 @@ const items: ZainoRoadmapDataItem[] = [
     },
     {
         id: [3, 3],
-        description: 'Cover Zebrads regtest mode with out full test suite and document all revelant issues.',
+        description: 'Cover Zebrads regtest mode with our full test suite and document all revelant issues.',
         index: [5, 2],
     },
     {
