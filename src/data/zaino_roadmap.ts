@@ -70,7 +70,7 @@ const items: ZainoRoadmapDataItem[] = [
     },
     {
         id: [1, 3],
-        description: 'Convert Indexer service to use zebra’s primitives.',
+        description: 'Convert Zaino service to use zebra’s primitives.',
         index: [1, 0],
     },
     {
@@ -85,7 +85,7 @@ const items: ZainoRoadmapDataItem[] = [
     },
     {
         id: [1, 6],
-        description: 'Outline of the Indexer design, contextualized by implementation.',
+        description: 'Outline of the Zaino design, contextualized by implementation.',
         index: [1, 3],
     },
     {
@@ -93,28 +93,28 @@ const items: ZainoRoadmapDataItem[] = [
         description: 'Provide interface to ReadStateService from Zebrad.',
         index: [2, 0],
     },
+    // {
+    //     id: [2, 2],
+    //     description: 'Help with the design of nullifier and outpoint spend detection maps.',
+    //     index: [2, 1],
+    // },
     {
         id: [2, 2],
-        description: 'Help with the design of nullifier and outpoint spend detection maps.',
-        index: [2, 1],
-    },
-    {
-        id: [2, 3],
         description: 'Create an internal CompactBlockCache RocksDB.*Possibly served directly by Zebra.',
         index: [3, 0],
     },
     {
-        id: [2, 4],
+        id: [2, 3],
         description: 'Provide interface to provide internal representation of mempool from Zebrad - IndexerMempool.',
         index: [3, 1],
     },
     {
-        id: [2, 5],
+        id: [2, 4],
         description: 'Implement lightwallet service using ReadStateService instead of the JSONRPC interface.',
         index: [4, 0],
     },
     {
-        id: [2, 6],
+        id: [2, 5],
         description: 'Leverage implementation to contextualize and finalize full architecture of Zaino.',
         index: [4, 3],
     },
@@ -123,18 +123,18 @@ const items: ZainoRoadmapDataItem[] = [
         description: 'Implement service to allow remote access to ReadStateService.',
         index: [5, 0],
     },
+    // {
+    //     id: [3, 2],
+    //     description: 'Use our experience with zingolib and zingo-cli to help with the development of zcash’s new cli wallet.',
+    //     index: [5, 1],
+    // },
     {
         id: [3, 2],
-        description: 'Use our experience with zingolib and zingo-cli to help with the development of zcash’s new cli wallet.',
-        index: [5, 1],
-    },
-    {
-        id: [3, 3],
         description: 'Cover Zebrads regtest mode with our full test suite and document all revelant issues.',
         index: [5, 2],
     },
     {
-        id: [3, 4],
+        id: [3, 3],
         description: 'Unpredicted but necessary functionality, emergent from milestone 2 architecture.',
         index: [5, 3],
     }
@@ -199,43 +199,43 @@ const simpleEdges : simpleEdge[] = [
     },
     {
         source: '1.4',
-        target: '2.5',
+        target: '2.4',
     },
     {
         source: '1.5',
-        target: '2.5',
+        target: '2.4',
     },
     {
         source: '1.6',
-        target: '2.6',
+        target: '2.5',
+    },
+    {
+        source: '2.1',
+        target: '2.2',
     },
     {
         source: '2.1',
         target: '2.3',
     },
     {
-        source: '2.1',
+        source: '2.2',
         target: '2.4',
     },
     {
         source: '2.3',
-        target: '2.5',
+        target: '2.4',
     },
     {
         source: '2.4',
-        target: '2.5',
+        target: '3.1',
     },
     {
         source: '2.5',
         target: '3.1',
     },
     {
-        source: '2.6',
-        target: '3.1',
-    },
-    {
-        source: '2.6',
-        target: '3.4',
+        source: '2.5',
+        target: '3.3',
     }
 
 ]
